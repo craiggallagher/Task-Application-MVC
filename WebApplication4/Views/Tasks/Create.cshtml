@@ -1,0 +1,86 @@
+﻿@model WebApplication4.Models.Task
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="Lead">Create Task</div>
+            </div>
+          
+            <div class="form-group">
+                @Html.LabelFor(model => model.TaskListId, "TaskListId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TaskListId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TaskListId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TaskName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        <div class="form-group">
+            <script src="@Url.Content("~/Scripts/jquery-ui.min.js")" type="text/javascript"></script>
+            <link href="@Url.Content("/Content/jquery-ui.min.css")" rel="stylesheet" type="text/css" />
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+
+                <input type="text" id="MyDate"
+                       @Html.EditorFor(model => model.StartDate, "{{0:d}", new { htmlAttributes = new { @class = "form-control" } })
+                       @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" }) 
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FinishDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" id="FinishDate"
+                       @Html.EditorFor(model => model.FinishDate, "{0:MM/dd/yyyy}", new { htmlAttributes = new { @class = "form-control" } })
+                       @Html.ValidationMessageFor(model => model.FinishDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <p>
+            <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>Create</button>
+        </p>
+        </div>
+        }
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#MyDate").datepicker();
+        $("#FinishDate").datepicker();
+
+    
+        
+    });
+</script>
+
+<div>
+    <a class=" btn btn-primary" href="@Url.Action("Index")"><span class=" glyphicon glyphicon-home"></span>&nbsp;Task</a>
+</div>
+
+       
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

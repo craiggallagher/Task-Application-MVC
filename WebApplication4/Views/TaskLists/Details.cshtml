@@ -1,0 +1,35 @@
+﻿@model WebApplication4.Models.TaskList
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TaskList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskListId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskListId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+  
+
+    </dl>
+</div>
+<p>
+
+    <a class=" btn btn-primary" href="@Url.Action("Index")"><span class=" glyphicon glyphicon-home"></span>&nbsp;Task List</a>
+</p>

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<WebApplication4.Models.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-primary" })
+</p>
+<table class="table table-bordered table-hover table-striped " style="margin-left:40px">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TaskName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.TaskList.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskList.Name)
+            </td>
+            <td>
+                <span class="btn btn-warning btn-sm" id="btnMovieEdit" onclick="editTask('@item.TaskId')">Edit</span>
+                <span class="btn btn-success btn-sm" onclick="showTask('@item.TaskId')">Details</span>
+                <span class="btn btn-danger btn-sm" id="btnMovieDelete" onclick="deleteTask('@item.TaskId')">Delete</span>
+            </td>
+        </tr>
+    }
+
+</table>
+<div id="Detail"></div>
+<div id="Delete"></div>
+<div id="Edit"></div>
+
+@section scripts
+{
+    <script>
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+
+        $('#btnMovieDelete').click(function () {
+            toastr.error('Delete Task');
+
+        });
+        function deleteTask(DtaskID) {
+            $.ajax({
+                url: '@Url.Action("TaskByID")',
+                data: { id: DtaskID},
+                success: function (data) {
+
+                    $('#Delete').hide();
+                    $('#Delete').html(data);
+                    $('#Delete').animate({
+                        opacity: 1,
+                        left: "+=50",
+                        height: "toggle"
+                    }, 3000, function () {
+                        // Animation complete.
+                    });
+                    $('#Detail').hide();
+                    $('#Edit').hide();
+                },
+            });
+        }
+
+        function showTask(showTaskID) {
+           
+                $.ajax({
+                    url: '@Url.Action("ShowTaskByID")',
+                    data: { id: showTaskID },
+                }).done(function (data) {
+                    $('#Detail').hide();
+                    $('#Detail').html(data);
+                    $('#Detail').animate({
+                        opacity: 1,
+                        left: "+=50",
+                        height: "toggle"
+                    }, 3000, function () {
+                        // Animation complete.
+                    });
+
+                    $('#Edit').hide();
+                    $('#Delete').hide();
+               
+               
+                });
+           
+        }
+
+        function editTask(EtaskID) {
+
+            $.ajax({
+                url: '@Url.Action("EditTaskID")',
+                data: { id: EtaskID },
+                success: function (data) {
+                    $('#Edit').hide();
+                    $('#Edit').html(data);
+                    $('#Edit').animate({
+                        opacity: 1,
+                        left: "+=50",
+                        height: "toggle"
+                    }, 3000, function () {
+                        // Animation complete.
+                    });
+                    $('#Delete').hide();
+                    $('#Detail').hide();
+
+                },
+                error: function (data) { $('#Edits').html('<h3>Error</h3>'); }
+            });
+        }
+
+
+
+    </script>
+}

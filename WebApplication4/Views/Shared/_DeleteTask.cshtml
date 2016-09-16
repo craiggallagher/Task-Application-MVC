@@ -1,0 +1,31 @@
+﻿
+@model WebApplication4.Models.Task
+
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h2>Confirm deletion of @Model.TaskName</h2>
+    </div>
+
+    <div class="panel-body">
+
+        <fieldset>
+            <legend>Details</legend>
+
+            <div>
+                @Html.DisplayFor(model => model.TaskName) starting
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <p>
+                        <a class="btn btn-info" href="@Url.Action("Index")"><span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                        <button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>Delete</button>
+                    </p>
+                }
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link href="~/Content/Styles.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 jumbotron">
+            <div class="text-center">
+                <h1>Task Application</h1>
+                <p>This application allows the user to create, view, edit, delete taks and task groups. It is simple and easy to use. </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+ 
+    </div>
+    
+        <div class="col-sm-pull-10"><span class="pull-right"></span>
+            <div class="thumbnail-right pull-right">
+                <img src="~/Images/taskList.jpg" alt="..."><span class="pull-right"></span>
+                <div class="caption-right">
+                    <h3>Tasks</h3>
+                    <p>The "Task List" section allows the user to view, create, delete and edit the name of each task.<br /> Each task list can then have many tasks in the "Task" section </p>
+
+                    <div class="form-actions no-color">
+
+                        <a class="btn btn-warning" href="@Url.Action("Index","TaskLists")"><span class="glyphicon glyphicon-tasks"></span>Task List</a>
+                    </div>
+               
+                </div>
+            </div>
+        </div>
+   
+
+
+   
+        <div class="col-sm-pull-8"><span class="pull-left"></span>
+   
+            <div class="thumbnail-left pull-left">
+                <img src="~/Images/task.png" alt="..." >
+                <div class="caption-left">
+                    <h3>Task List</h3>
+                    <p>The "Task" section allows the user to view all their tasks.<br /> The user cna also create, edit, delet or view a single task.</p>
+                    <div class="form-actions no-color">
+
+                        <a class="btn btn-info" href="@Url.Action("Index","Tasks")"><span class="glyphicon glyphicon-tasks"></span>Task</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
